@@ -17,6 +17,27 @@ function Project() {
       let arr = todos.filter(item => item.id !== todo.id)
       setTodos(arr)
   }
+  function handleCheck(event,todo) {
+        console.log(todos);
+        if(event.target.checked) {
+            let arr = todos.map((item) => {
+                if(item.id === todo.id) {
+                    item.checked = true;
+                }
+                return item
+            })
+            setTodos(arr)
+        }else {
+          let arr = todos.map((item) => {
+              if(item.id === todo.id) {
+                  item.checked = false;
+              }
+              return item
+          })
+          setTodos(arr)
+        }
+   
+  }
   return (
     <div className="project-container d-flex flex-column bg-white px-2 py-3">
       <div className="row title-container">
@@ -60,6 +81,8 @@ function Project() {
                   type="checkbox"
                   class="form-check-input"
                   id="exampleCheck1"
+                  checked={todo.checked}
+                  onChange={(event) => handleCheck(event,todo)}
                 />
                 <label class="form-check-label" for="exampleCheck1">
                   {todo.title}
