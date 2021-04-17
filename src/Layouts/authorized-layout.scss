@@ -1,0 +1,23 @@
+.main {
+    display: flex;
+    height: 100%;
+    .left-menu {
+        color: white;
+        flex:.25;
+        background-color:#222;
+        .avatar-container {
+            img {
+                width: 5rem;
+                height: 5rem;
+                object-fit: contain;
+                border-radius: 50%;
+                border:2px solid rgba(255,255,255,.7)
+                
+            }
+        }
+    }
+    .content {
+        flex:1;
+        background-color: #e2e2e2;
+    }
+}
