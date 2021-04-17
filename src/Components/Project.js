@@ -1,9 +1,10 @@
 import React,{useState} from "react";
 import "./project.scss";
-import { FaRegTimesCircle } from "react-icons/fa";
+import { FaRegTimesCircle,FaCheck } from "react-icons/fa";
 
 function Project() {
   const [todos, setTodos] = useState([]);
+  const [projectName,setProjectName] = useState("");
   const [todotitle,setToDoTitle] = useState("")
   function handleAdd(){
     setTodos([
@@ -36,21 +37,37 @@ function Project() {
           })
           setTodos(arr)
         }
+  }
+
+  function handleBlur (){
    
+  }
+
+  function handleChangeProjectName(event){
+    setProjectName(event.target.value);
   }
   return (
     <div className="project-container d-flex flex-column bg-white px-2 py-3">
       <div className="row title-container">
         <div className="col-md-12">
           <label for="project-title-input">Proje Başlığı</label>
+          <div className="d-flex">
           <input
             type="text"
-            class="form-control"
+            class="form-control col-md-10"
             id="project-title-input"
             aria-describedby="projectTitle"
+            value={projectName}
+            onChange={handleChangeProjectName}
+            onBlur={handleBlur}
             placeholder="Projenize Bir İsim Verin"
             name="title"
+           
           />
+           <button type="button" class="btn btn-success col-md-2" >
+           <FaCheck />
+          </button>
+          </div>
           <hr />
         </div>
       </div>
