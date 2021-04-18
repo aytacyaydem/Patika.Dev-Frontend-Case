@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./project.scss";
-import { FaRegTimesCircle, FaCheck,FaRegCheckCircle } from "react-icons/fa";
+import { FaRegTimesCircle, FaCheck, FaRegCheckCircle } from "react-icons/fa";
 
 function Project({
   onAdd,
@@ -11,7 +11,7 @@ function Project({
   onRemoveTodo,
   onToggleTodo,
   onCategoryChange,
-  category
+  category,
 }) {
   const [todos, setTodos] = useState([]);
   const [projectName, setProjectName] = useState("");
@@ -40,9 +40,9 @@ function Project({
     onRemoveTodo(projectId, todo);
   }
 
-  function handleCategoryChange(event){
+  function handleCategoryChange(event) {
     event.preventDefault();
-    onCategoryChange(projectId,event.target.name);
+    onCategoryChange(projectId, event.target.name);
   }
 
   React.useEffect(() => {
@@ -50,13 +50,14 @@ function Project({
   }, [projectTodos]);
 
   return (
-    <div className={`project-container d-flex flex-column bg-white px-2 py-3 ${category}`}>
+    <div
+      className={`project-container d-flex flex-column bg-white px-2 py-3 ${category}`}
+    >
       <div className="row title-container">
         <div className="col-md-12">
           <div className="d-flex justify-content-between mb-2">
             <label htmlFor="project-title-input">Proje Başlığı</label>
             <div>
-            
               <div className="btn-group dropright ml-2">
                 <button
                   type="button"
@@ -68,21 +69,40 @@ function Project({
                   Kategori
                 </button>
                 <div className="dropdown-menu">
-                  <a className="dropdown-item text-success" href="#" name="genel" onClick={handleCategoryChange}>
-                   Genel
+                  <a
+                    className="dropdown-item text-success"
+                    href="#"
+                    name="genel"
+                    onClick={handleCategoryChange}
+                  >
+                    Genel
                   </a>
-                  <a className="dropdown-item text-info" href="#" name="is" onClick={handleCategoryChange}>
-                   İş
+                  <a
+                    className="dropdown-item text-info"
+                    href="#"
+                    name="is"
+                    onClick={handleCategoryChange}
+                  >
+                    İş
                   </a>
-                  <a className="dropdown-item text-danger" href="#" name="kisisel" onClick={handleCategoryChange}>
+                  <a
+                    className="dropdown-item text-danger"
+                    href="#"
+                    name="kisisel"
+                    onClick={handleCategoryChange}
+                  >
                     Kişisel
                   </a>
-                  <a className="dropdown-item text-warning" href="#" name="okul" onClick={handleCategoryChange}>
+                  <a
+                    className="dropdown-item text-warning"
+                    href="#"
+                    name="okul"
+                    onClick={handleCategoryChange}
+                  >
                     Okul
                   </a>
                 </div>
               </div>
-              
             </div>
           </div>
           <div className="d-flex">
@@ -130,7 +150,7 @@ function Project({
           </button>
         </div>
       </div>
-      <div className="row todo-list-container mt-2 mb-5">
+      <div className="row todo-list-container mb-5 mt-2">
         <div className="col-md-12 d-flex">
           <ul className="list-group col-md-12 px-0">
             {todos.map((todo) => (
@@ -158,14 +178,29 @@ function Project({
           </ul>
         </div>
       </div>
-      <a href="#" onClick={handleRemoveProject} className="removeBtn text-danger border-danger">Projeyi Sil
-                {<FaRegTimesCircle />}
-              </a>
-              <a href="#" onClick={handleRemoveProject} className="saveBtn text-success border-success">Kaydet
-                {<FaRegCheckCircle />}
-              </a>
+      <div className="row footer-buttons flex-fill justify-content-end align-items-end">
+        <div class="col-md-12 d-flex justify-content-end">
+        <a
+        href="#"
+        onClick={handleRemoveProject}
+        className="removeBtn text-danger border-danger"
+      >
+        Projeyi Sil
+        {<FaRegTimesCircle />}
+      </a>
+      <a
+        href="#"
+        onClick={handleRemoveProject}
+        className="saveBtn text-success border-success"
+      >
+        Kaydet
+        {<FaRegCheckCircle />}
+      </a>
+        </div>
+    
+      </div>
+    
     </div>
-
   );
 }
 

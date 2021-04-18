@@ -20,13 +20,11 @@
   .removeBtn {
     display: flex;
     align-items: center;
-    position: absolute;
+    height:50%;
     border:1px solid black;
     border-radius: .3rem;
     padding:.2rem .5rem;
-    bottom:1rem;
     text-decoration: none;
-    right: .7rem;
     svg {
       margin-left: .3rem;
     }
@@ -34,13 +32,11 @@
   .saveBtn {
     display: flex;
     align-items: center;
+    height: 50%;
     border:1px solid black;
     border-radius: .3rem;
     padding:.2rem .5rem;
-    position: absolute;
     text-decoration: none;
-    bottom:1rem;
-    right: 7.8rem;
     svg {
       margin-left: .3rem;
     }
