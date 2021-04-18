@@ -2,37 +2,16 @@ import React,{useState} from "react";
 import "./project.scss";
 import { FaRegTimesCircle,FaCheck } from "react-icons/fa";
 
-function Project({onAdd,projectId,projectTodos,onUpdateName}) {
-  const [todos, setTodos] = useState(projectTodos);
+function Project({onAdd,projectId,projectTodos,onUpdateName,onRemoveProject,onRemoveTodo,onToggleTodo}) {
+  const [todos, setTodos] = useState([]);
   const [projectName,setProjectName] = useState("");
   const [todotitle,setToDoTitle] = useState("")
   function handleAdd(){
     onAdd(projectId,todotitle);
   }
 
-  function handleRemove(todo) {
-      let arr = todos.filter(item => item.id !== todo.id)
-      setTodos(arr)
-  }
-  function handleCheck(event,todo) {
-        console.log(todos);
-        if(event.target.checked) {
-            let arr = todos.map((item) => {
-                if(item.id === todo.id) {
-                    item.checked = true;
-                }
-                return item
-            })
-            setTodos(arr)
-        }else {
-          let arr = todos.map((item) => {
-              if(item.id === todo.id) {
-                  item.checked = false;
-              }
-              return item
-          })
-          setTodos(arr)
-        }
+  function handleCheck(projectId,todo) {
+        onToggleTodo(projectId,todo);
   }
 
   function handleChangeProjectName(event){
@@ -42,12 +21,30 @@ function Project({onAdd,projectId,projectTodos,onUpdateName}) {
     onUpdateName(projectId,projectName);
   }
 
+  function handleRemoveProject(event){
+    event.preventDefault();
+    onRemoveProject(projectId);
+  }
+
+  function handleRemoveTodo(projectId,todo){
+    onRemoveTodo(projectId,todo)
+  }
+
+  React.useEffect(() => {
+    setTodos(projectTodos)
+  },[projectTodos])
+
  
   return (
     <div className="project-container d-flex flex-column bg-white px-2 py-3">
       <div className="row title-container">
         <div className="col-md-12">
+          <div className="d-flex justify-content-between mb-2">
           <label htmlFor="project-title-input">Proje Başlığı</label>
+          <a href="#" onClick={handleRemoveProject}>
+          {<FaRegTimesCircle />}
+          </a>
+          </div>
           <div className="d-flex">
           <input
             type="text"
@@ -95,13 +92,13 @@ function Project({onAdd,projectId,projectTodos,onUpdateName}) {
                   className="form-check-input"
                   id="exampleCheck1"
                   checked={todo.checked}
-                  onChange={(event) => handleCheck(event,todo)}
+                  onChange={(event) => handleCheck(projectId,todo)}
                 />
                 <label className="form-check-label" htmlFor="exampleCheck1">
                   {todo.title}
                 </label>
               </div>
-              <a onClick={() => handleRemove(todo)}>
+              <a onClick={() => handleRemoveTodo(projectId,todo)}>
                   <FaRegTimesCircle />
               </a>
             </li>
