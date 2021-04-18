@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import "./project.scss";
 import { FaRegTimesCircle,FaCheck } from "react-icons/fa";
 
-function Project({onAdd,projectId,projectTodos}) {
+function Project({onAdd,projectId,projectTodos,onUpdateName}) {
   const [todos, setTodos] = useState(projectTodos);
   const [projectName,setProjectName] = useState("");
   const [todotitle,setToDoTitle] = useState("")
@@ -35,11 +35,14 @@ function Project({onAdd,projectId,projectTodos}) {
         }
   }
 
-
-
   function handleChangeProjectName(event){
     setProjectName(event.target.value);
   }
+  function handleName(){
+    onUpdateName(projectId,projectName);
+  }
+
+ 
   return (
     <div className="project-container d-flex flex-column bg-white px-2 py-3">
       <div className="row title-container">
@@ -48,7 +51,7 @@ function Project({onAdd,projectId,projectTodos}) {
           <div className="d-flex">
           <input
             type="text"
-            className="form-control col-md-10"
+            className={`form-control col-md-10 ${projectName && "filledInput"}`}
             id="project-title-input"
             aria-describedby="projectTitle"
             value={projectName}
@@ -57,7 +60,7 @@ function Project({onAdd,projectId,projectTodos}) {
             name="title"
            
           />
-           <button type="button" className="btn btn-success col-md-2" >
+           <button type="button" className="btn btn-success col-md-2" onClick={handleName} >
            <FaCheck />
           </button>
           </div>

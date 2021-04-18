@@ -20,6 +20,16 @@ function Main() {
             return arr;  
         })
       }
+      function handleChangeProjectName(id,name){
+        let arr = projects.map(project => {
+            if(project.id === id) {
+                project.projectName = name;
+            }
+            return project;
+        }
+        )
+        setProjects(arr);
+      }
     
     return (
         <div className="main-content">
@@ -30,7 +40,7 @@ function Main() {
                 {console.log("Projeler",projects)}
                 {projects.map((project) => (
                     <div className="col-md-3 px-0 mr-2 mb-3" key={project.id}>
-                        <Project onAdd={handleAddTodo} projectId={project.id} projectTodos={project.todos} />
+                        <Project onAdd={handleAddTodo} projectId={project.id} projectTodos={project.todos} onUpdateName={handleChangeProjectName}/>
                     </div>
                 ))}
                 

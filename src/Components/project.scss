@@ -5,6 +5,9 @@
   -webkit-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.67);
   -moz-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.67);
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.67);
+  .filledInput {
+    background-color: #e2e2e2;
+  }
   .todo-list-container {
     ul {
       .list-group-item {
