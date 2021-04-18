@@ -8,7 +8,7 @@ function Main() {
   function handleCreateProject() {
     setProjects([
       ...projects,
-      { id: Math.floor(Math.random() * 99999), projectName: "", todos: [] },
+      { id: Math.floor(Math.random() * 99999), projectName: "", todos: [],category:"genel"},
     ]);
   }
   function handleAddTodo(id, title) {
@@ -70,6 +70,16 @@ function Main() {
     })
     setProjects(checked);
   }
+  function handleProjectCategory(projectId,category) {
+      let updated = projects.map(project => {
+          if(project.id == projectId) {
+              project.category = category
+              return project
+          }
+          return project
+      })
+      setProjects(updated);
+  }
   React.useEffect(() => {
     console.log("Projects güncellendi");
   }, [projects]);
@@ -91,6 +101,8 @@ function Main() {
               onRemoveProject={handleRemoveProject}
               onRemoveTodo={handleRemoveTodo}
               onToggleTodo={handleToggleCheck}
+              onCategoryChange={handleProjectCategory}
+              category={project.category}
             />
           </div>
         ))}
