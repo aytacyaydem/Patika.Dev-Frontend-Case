@@ -57,7 +57,7 @@ function Project({
             <label htmlFor="project-title-input">Proje Başlığı</label>
             <div>
             
-              <div class="btn-group dropright ml-2">
+              <div className="btn-group dropright ml-2">
                 <button
                   type="button"
                   className="btn btn-sm btn-dark dropdown-toggle"
