@@ -69,7 +69,7 @@ function Project({onAdd,projectId,projectTodos}) {
           <input
             type="text"
             className="form-control col-md-10"
-            id="project-title-input"
+            id="project-todo-input"
             onChange={event => setToDoTitle(event.target.value)}
             value={todotitle}
             aria-describedby="projectTitle"

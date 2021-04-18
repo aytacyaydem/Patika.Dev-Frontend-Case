@@ -4,11 +4,7 @@ import {Project} from "../Components/Project"
 import "./main.scss"
 
 function Main() {
-    const [projects,setProjects] = useState([
-        {id:0,projectName:"Yeni Proje",todos:[
-            {id:0,title:"Merhabalar",checked:false}
-        ]}
-    ])
+    const [projects,setProjects] = useState([])
     function handleCreateProject(){
         setProjects([...projects,{id:projects.length+1,projectName:"",todos:[]}])
     }
@@ -21,8 +17,7 @@ function Main() {
                 }
                 return project
             })
-            return arr;
-            
+            return arr;  
         })
       }
     
@@ -34,8 +29,8 @@ function Main() {
                 </div>
                 {console.log("Projeler",projects)}
                 {projects.map((project) => (
-                    <div className="col-md-3 px-0 mr-2 mb-3">
-                        <Project onAdd={handleAddTodo} projectId={project.id} projectTodos={project.todos}/>
+                    <div className="col-md-3 px-0 mr-2 mb-3" key={project.id}>
+                        <Project onAdd={handleAddTodo} projectId={project.id} projectTodos={project.todos} />
                     </div>
                 ))}
                 
