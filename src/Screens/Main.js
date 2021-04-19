@@ -12,7 +12,7 @@ function Main() {
   function handleCreateProject() {
     setProjects([
       ...projects,
-      { id: Math.floor(Math.random() * 99999), projectName: "", todos: [],category:"genel"},
+      { id: Math.floor(Math.random() * 99999), projectName: "", todos: [],category:"genel",saved:false},
     ]);
   }
   function handleAddTodo(id, title) {
@@ -88,6 +88,18 @@ function Main() {
     //   console.log("Seçilenler",selectedCategories)
      
   }
+  function handleSaveProject(projectId){
+    let copy = [...projects];
+    let index = copy.findIndex(el => el.id === projectId);
+    copy[index] = {...copy[index], saved:true};
+    setProjects(copy)
+    }
+    function handleUnsaveProject(projectId){
+      let copy = [...projects];
+      let index = copy.findIndex(el => el.id === projectId);
+      copy[index] = {...copy[index], saved:false};
+      setProjects(copy)
+      }
   React.useEffect(() => {
     handleFilterProjects();
     setProjectsToShow(projects);
@@ -159,6 +171,10 @@ function Main() {
               onToggleTodo={handleToggleCheck}
               onCategoryChange={handleProjectCategory}
               category={project.category}
+              onSaveProject={handleSaveProject}
+              saved={project.saved}
+              existName={project.projectName}
+              onUnsaveProject={handleUnsaveProject}
             />
           </div>
         ))}

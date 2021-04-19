@@ -1,7 +1,8 @@
-import React, { useState,useContext } from "react";
+import React, { useState } from "react";
 import {FilterContext} from "../Context/FilterContext"
 import "./authorized-layout.scss";
 import { useHistory } from "react-router-dom";
+import { FaLockOpen } from "react-icons/fa";
 
 function AuthorizedLayout({ children }) {
   const history = useHistory();

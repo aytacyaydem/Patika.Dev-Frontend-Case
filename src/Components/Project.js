@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./project.scss";
-import { FaRegTimesCircle, FaCheck, FaRegCheckCircle } from "react-icons/fa";
+import { FaRegTimesCircle, FaEdit, FaRegCheckCircle } from "react-icons/fa";
+import {useSpring, animated} from 'react-spring'
 
 function Project({
   onAdd,
@@ -12,10 +13,20 @@ function Project({
   onToggleTodo,
   onCategoryChange,
   category,
+  onSaveProject,
+  saved,
+  existName,
+  onUnsaveProject
 }) {
   const [todos, setTodos] = useState([]);
-  const [projectName, setProjectName] = useState("");
+  const [projectName, setProjectName] = useState(existName);
   const [todotitle, setToDoTitle] = useState("");
+  const [showOverlay,setShowOverlay] = useState(false)
+  const props = useSpring({
+    y :0,x:0,
+    from : {y: -100,x:-100}
+  })
+
   function handleAdd() {
     onAdd(projectId, todotitle);
   }
@@ -26,9 +37,6 @@ function Project({
 
   function handleChangeProjectName(event) {
     setProjectName(event.target.value);
-  }
-  function handleName() {
-    onUpdateName(projectId, projectName);
   }
 
   function handleRemoveProject(event) {
@@ -45,14 +53,35 @@ function Project({
     onCategoryChange(projectId, event.target.name);
   }
 
+  function handleSaveProject(){
+    onUpdateName(projectId, projectName);
+    onSaveProject(projectId)
+    // handleName();
+  }
+  function handleUnsaveProject(){
+    onUnsaveProject(projectId);
+  }
+
   React.useEffect(() => {
     setTodos(projectTodos);
   }, [projectTodos]);
 
   return (
-    <div
+    <animated.div style={props}
       className={`project-container d-flex flex-column bg-white px-2 py-3 ${category}`}
+      onMouseEnter={() => setShowOverlay(true)}
+      onMouseLeave={() => setShowOverlay(false)}
     >
+      {(showOverlay && saved) && <div  className="overlay d-flex justify-content-center align-items-center">
+      <button
+        href="#"
+        onClick={handleUnsaveProject}
+        className="btn btn-dark text-white border-success ml-2 d-flex justify-content-center align-items-center text-center py-2 px -2"
+      >
+        
+        {<FaEdit className="ml-1"/>}
+      </button>
+      </div>}
       <div className="row title-container">
         <div className="col-md-12">
           <div className="d-flex justify-content-between mb-2">
@@ -115,6 +144,7 @@ function Project({
               aria-describedby="projectTitle"
               value={projectName}
               onChange={handleChangeProjectName}
+              readOnly={saved}
               placeholder="Projenize Bir İsim Verin"
               name="title"
             />
@@ -129,7 +159,8 @@ function Project({
           <hr />
         </div>
       </div>
-      <div className="row add-container">
+      {!saved && (
+        <div className="row add-container">
         <div className="col-md-12 d-flex">
           <input
             type="text"
@@ -150,6 +181,8 @@ function Project({
           </button>
         </div>
       </div>
+      )}
+      
       <div className="row todo-list-container mb-5 mt-2">
         <div className="col-md-12 d-flex">
           <ul className="list-group col-md-12 px-0">
@@ -170,37 +203,38 @@ function Project({
                     {todo.title}
                   </label>
                 </div>
-                <a onClick={() => handleRemoveTodo(projectId, todo)}>
+                {!saved && <a onClick={() => handleRemoveTodo(projectId, todo)}>
                   <FaRegTimesCircle />
-                </a>
+                </a>}
               </li>
             ))}
           </ul>
         </div>
       </div>
       <div className="row footer-buttons flex-fill justify-content-end align-items-end">
-        <div class="col-md-12 d-flex justify-content-end">
-        <a
+        <div className="col-md-12 d-flex justify-content-end">
+        {!saved && <button
         href="#"
         onClick={handleRemoveProject}
-        className="removeBtn text-danger border-danger"
+        className="removeBtn btn btn-outline text-danger border-danger"
       >
-        Projeyi Sil
+        Kaldır
         {<FaRegTimesCircle />}
-      </a>
-      <a
+      </button>}
+      {!saved && <button
         href="#"
-        onClick={handleRemoveProject}
-        className="saveBtn text-success border-success"
+        onClick={handleSaveProject}
+        disabled={todos.length < 1 || !projectName}
+        className="saveBtn btn btn-outline text-success border-success ml-2"
       >
         Kaydet
         {<FaRegCheckCircle />}
-      </a>
+      </button>}
         </div>
     
       </div>
     
-    </div>
+    </animated.div>
   );
 }
 
