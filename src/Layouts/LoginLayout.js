@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./login-layout.scss";
 
 function LoginLayout({ children }) {
