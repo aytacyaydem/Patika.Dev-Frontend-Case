@@ -10,10 +10,10 @@ function Login() {
     error: "",
   });
   React.useEffect(() => {
-    if(localStorage.getItem("user")) {
+    if (localStorage.getItem("user")) {
       history.replace("/");
     }
-  },[])
+  }, []);
   function handleInput(event) {
     setCredentials({
       ...credentials,
@@ -31,7 +31,10 @@ function Login() {
         ...credentials,
         error: "",
       });
-      localStorage.setItem("user",`${credentials.name} ${credentials.surname}`)
+      localStorage.setItem(
+        "user",
+        `${credentials.name} ${credentials.surname}`
+      );
       history.replace("/");
     }
   }

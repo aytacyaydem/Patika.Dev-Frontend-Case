@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {FilterContext} from "../Context/FilterContext"
+import { FilterContext } from "../Context/FilterContext";
 import "./authorized-layout.scss";
 import { useHistory } from "react-router-dom";
 import { FaLockOpen } from "react-icons/fa";
@@ -7,18 +7,18 @@ import { FaLockOpen } from "react-icons/fa";
 function AuthorizedLayout({ children }) {
   const history = useHistory();
   const [user, setUser] = useState("");
-  const [selectedCategory,setSelectedCategory] = useState({
-      genel:false,
-      is:false,
-      kisisel:false,
-      okul:false
+  const [selectedCategory, setSelectedCategory] = useState({
+    genel: false,
+    is: false,
+    kisisel: false,
+    okul: false,
   });
 
-  function handleSelectedCategory(event){
+  function handleSelectedCategory(event) {
     setSelectedCategory({
-        ...selectedCategory,
-        [event.target.name]:event.target.checked
-    })
+      ...selectedCategory,
+      [event.target.name]: event.target.checked,
+    });
   }
   React.useEffect(() => {
     if (!localStorage.getItem("user")) {
@@ -95,16 +95,15 @@ function AuthorizedLayout({ children }) {
                 Okul
               </label>
             </div>
-            
           </div>
         </div>
       </div>
       <div className="content py-3 px-2">
         <div className="container">
-        <FilterContext.Provider value={selectedCategory}>
+          <FilterContext.Provider value={selectedCategory}>
             {children}
-        </FilterContext.Provider>
-            </div>
+          </FilterContext.Provider>
+        </div>
       </div>
     </div>
   );

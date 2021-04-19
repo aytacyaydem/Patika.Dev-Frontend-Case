@@ -1,27 +1,26 @@
 .main {
-    display: flex;
-    .left-menu {
-        color: white;
-        flex:.25;
-        background-color:#222;
-        .avatar-container {
-            img {
-                width: 5rem;
-                height: 5rem;
-                object-fit: contain;
-                border-radius: 50%;
-                border:2px solid rgba(255,255,255,.7)
-                
-            }
-        }
-        .filter-form {
-            border:1px solid rgba(255,255,255,0.8);
-            border-radius: .2rem;
-        }
+  display: flex;
+  .left-menu {
+    color: white;
+    flex: 0.25;
+    background-color: #222;
+    .avatar-container {
+      img {
+        width: 5rem;
+        height: 5rem;
+        object-fit: contain;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.7);
+      }
     }
-    .content {
-        flex:1;
-        background-color: #e2e2e2;
-        min-height: 100vh;
+    .filter-form {
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 0.2rem;
     }
+  }
+  .content {
+    flex: 1;
+    background-color: #e2e2e2;
+    min-height: 100vh;
+  }
 }
